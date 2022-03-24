@@ -9,7 +9,9 @@ function App() {
         <img src={logo} className='App-logo' alt='logo' />
         <div className='title'>Tic Tac Toe Game</div>
       </header>
-      <Board rows='3' cols='3' />
+      <div className='game-body'>
+        <Board rows='3' cols='3' />
+      </div>
     </div>
   )
 }
