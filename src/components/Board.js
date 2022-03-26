@@ -1,13 +1,16 @@
-import React from 'react'
-import ColumnsInRow from './ColumnsInRow'
+import React, { useState } from 'react'
 import RowsInBoard from './RowsInBoard'
 
 const Board = ({ rows, cols }) => {
-  const colArr = [...Array(Number.parseInt(cols))]
-  const columnsInBoard = <ColumnsInRow colArr={colArr} />
+  const [turns, setTurns] = useState(0)
   const rowArr = [...Array(Number.parseInt(rows))]
   const rowsInBoard = (
-    <RowsInBoard rowArr={rowArr} columnsInBoard={columnsInBoard} />
+    <RowsInBoard
+      rowArr={rowArr}
+      cols={cols}
+      turns={turns}
+      setTurns={setTurns}
+    />
   )
   return rowsInBoard
 }

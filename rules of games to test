@@ -1,0 +1,16 @@
+rule 1:
+Every click should result in a x or o being displayed on the screen
+
+
+Every click on square should alternatively display x and O 
+That once click on square should not 
+    -- no consecutive x is allowed
+    -- no consecutive o is allowed
+
+win:
+    -- When there is are consecutive 3 x horizontally vertically or diagnally
+    -- When there is are consecutive 3 o horizontally vertically or diagnally
+
+Game stops when:
+    --when there is a win
+    --when all the columns and rows are used without winning
