@@ -17,4 +17,10 @@ describe('Block selected', () => {
     r2c3.click()
     expect(r2c3.textContent).toBe('O')
   })
+  test('No duplicate selection of a block', () => {
+    render(<App />)
+    const r2c2 = screen.getByTestId('R2C2')
+    r2c2.click()
+    expect(r2c2.disabled).toBe(true)
+  })
 })
