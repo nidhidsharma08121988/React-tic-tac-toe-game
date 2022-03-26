@@ -15,7 +15,7 @@ const Block = ({ colId, rowId, turns, setTurns }) => {
       id={`${rowId}${colId}`}
       data-testid={`${rowId}${colId}`}
       onClick={handleBlockClick}
-      //   disabled={disable}
+      disabled={disable}
     >
       {value}
     </button>
