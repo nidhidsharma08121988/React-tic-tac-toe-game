@@ -4,7 +4,7 @@ import RowsInBoard from './RowsInBoard'
 const Board = ({ rows, cols }) => {
   const [turns, setTurns] = useState(0)
   const rowArr = [...Array(Number.parseInt(rows))]
-  const rowsInBoard = (
+  return (
     <RowsInBoard
       rowArr={rowArr}
       cols={cols}
@@ -12,7 +12,6 @@ const Board = ({ rows, cols }) => {
       setTurns={setTurns}
     />
   )
-  return rowsInBoard
 }
 
 export default Board

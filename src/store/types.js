@@ -1,0 +1,5 @@
+export const SET_BOARD_STATE = 'SET_BOARD_STATE'
+export const SET_TURNS = 'SET_TURNS'
+export const SET_COLS = 'SET_COLS'
+export const SET_ROWS = 'SET_ROWS'
+export const SET_OUTCOME = 'SET_OUTCOME'
