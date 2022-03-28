@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { GameContext } from '../store/GameState'
 
-const Block = ({ colId, rowId, turns, setTurns }) => {
-  const { boardState, setBoardState } = useContext(GameContext)
+const Block = ({ colId, rowId }) => {
+  const { boardState, setBoardState, turns, setTurns } = useContext(GameContext)
   const setDisableValue = () => boardState[`${rowId}${colId}`].disabled
   const showValue = () => boardState[`${rowId}${colId}`].value
 

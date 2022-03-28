@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from 'react'
 import gameReducer from './gameReducer'
-import { SET_BOARD_STATE } from './types'
+import { SET_BOARD_STATE, SET_TURNS } from './types'
 
 const initialState = {
   boardState: {
@@ -56,9 +56,21 @@ const GameState = ({ children }) => {
       payload: newBoardState,
     })
   }
+
+  const setTurns = turns => {
+    dispatch({
+      type: SET_TURNS,
+      payload: turns,
+    })
+  }
   return (
     <GameContext.Provider
-      value={{ boardState: state.boardState, setBoardState }}
+      value={{
+        boardState: state.boardState,
+        setBoardState,
+        turns: state.turns,
+        setTurns,
+      }}
     >
       {children}
     </GameContext.Provider>
