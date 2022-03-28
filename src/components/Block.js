@@ -3,8 +3,7 @@ import { GameContext } from '../store/GameState'
 
 const Block = ({ colId, rowId, turns, setTurns }) => {
   const { boardState, setBoardState } = useContext(GameContext)
-
-  const handleDisable = () => boardState[`${rowId}${colId}`].disabled
+  const setDisableValue = () => boardState[`${rowId}${colId}`].disabled
   const showValue = () => boardState[`${rowId}${colId}`].value
 
   const setBlockValueTo = (e, value) => {
@@ -32,7 +31,7 @@ const Block = ({ colId, rowId, turns, setTurns }) => {
       id={`${rowId}${colId}`}
       data-testid={`${rowId}${colId}`}
       onClick={handleBlockClick}
-      disabled={handleDisable()}
+      disabled={setDisableValue()}
     >
       {showValue()}
     </button>
