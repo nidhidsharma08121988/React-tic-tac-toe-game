@@ -14,7 +14,6 @@ function App() {
         <div className='game-body'>
           <Board rows='3' cols='3' />
         </div>
-        <div></div>
       </div>
     </GameState>
   )

@@ -41,16 +41,15 @@ function checkOIsWinner(boardState) {
 }
 
 function checkXIsWinning(boardState) {
-  return (
-    hasWinningCombination(boardState, XInSameCol1) ||
-    hasWinningCombination(boardState, XInSameCol2) ||
-    hasWinningCombination(boardState, XInSameCol3) ||
-    hasWinningCombination(boardState, XInSameRow1) ||
-    hasWinningCombination(boardState, XInSameRow2) ||
-    hasWinningCombination(boardState, XInSameRow3) ||
-    hasWinningCombination(boardState, XDiagonalL) ||
-    hasWinningCombination(boardState, XDiagonalR)
-  )
+  return false
+  // hasWinningCombination(boardState, XInSameCol1) ||
+  // hasWinningCombination(boardState, XInSameCol2) ||
+  // hasWinningCombination(boardState, XInSameCol3) ||
+  // hasWinningCombination(boardState, XInSameRow1) ||
+  // hasWinningCombination(boardState, XInSameRow2) ||
+  // hasWinningCombination(boardState, XInSameRow3) ||
+  // hasWinningCombination(boardState, XDiagonalL) ||
+  // hasWinningCombination(boardState, XDiagonalR)
 }
 
 const Board = ({ rows, cols }) => {
@@ -59,11 +58,11 @@ const Board = ({ rows, cols }) => {
 
   useEffect(() => {
     const XIsWinning = checkXIsWinning(boardState)
-    const OIsWinning = checkOIsWinner(boardState)
+    // const OIsWinning = checkOIsWinner(boardState)
 
     if (XIsWinning) setOutcome('Winner is X')
-    else if (OIsWinning) setOutcome('Winner is O')
-    else setOutcome('')
+    // else if (OIsWinning) setOutcome('Winner is O')
+    // else setOutcome('')
     //eslint-disable-next-line
   }, [boardState])
 
