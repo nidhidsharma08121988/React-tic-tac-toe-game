@@ -65,7 +65,7 @@ const winningCombinationO = {
       value: 'O',
     },
   },
-  ODiagonal: {
+  ODiagonalL: {
     R1C1: {
       value: 'O',
     },
@@ -73,6 +73,17 @@ const winningCombinationO = {
       value: 'O',
     },
     R3C3: {
+      value: 'O',
+    },
+  },
+  ODiagonalR: {
+    R1C3: {
+      value: 'O',
+    },
+    R2C2: {
+      value: 'O',
+    },
+    R3C1: {
       value: 'O',
     },
   },

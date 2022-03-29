@@ -65,7 +65,7 @@ const winningCombinationX = {
       value: 'X',
     },
   },
-  XDiagonal: {
+  XDiagonalL: {
     R1C1: {
       value: 'X',
     },
@@ -73,6 +73,17 @@ const winningCombinationX = {
       value: 'X',
     },
     R3C3: {
+      value: 'X',
+    },
+  },
+  XDiagonalR: {
+    R1C3: {
+      value: 'X',
+    },
+    R2C2: {
+      value: 'X',
+    },
+    R3C1: {
       value: 'X',
     },
   },
