@@ -1,4 +1,4 @@
-import { SET_BOARD_STATE, SET_TURNS } from './types'
+import { SET_BOARD_STATE, SET_TURNS, SET_OUTCOME } from './types'
 
 const gameReducer = (state, action) => {
   switch (action.type) {
@@ -11,6 +11,11 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         turns: action.payload,
+      }
+    case SET_OUTCOME:
+      return {
+        ...state,
+        outcome: action.payload,
       }
     default:
       return state
