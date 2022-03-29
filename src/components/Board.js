@@ -5,46 +5,61 @@ import winningCombinationO from '../store/winningCombinationO'
 import winningCombinationX from '../store/winningCombinationX'
 import hasWinningCombination from '../store/boardContainsObject'
 
+const {
+  XInSameCol1,
+  XInSameCol2,
+  XInSameCol3,
+  XInSameRow1,
+  XInSameRow2,
+  XInSameRow3,
+  XDiagonalL,
+  XDiagonalR,
+} = winningCombinationX
+
+const {
+  OInSameCol1,
+  OInSameCol2,
+  OInSameCol3,
+  OInSameRow1,
+  OInSameRow2,
+  OInSameRow3,
+  ODiagonalL,
+  ODiagonalR,
+} = winningCombinationO
+
+function checkOIsWinner(boardState) {
+  return (
+    hasWinningCombination(boardState, OInSameCol1) ||
+    hasWinningCombination(boardState, OInSameCol2) ||
+    hasWinningCombination(boardState, OInSameCol3) ||
+    hasWinningCombination(boardState, OInSameRow1) ||
+    hasWinningCombination(boardState, OInSameRow2) ||
+    hasWinningCombination(boardState, OInSameRow3) ||
+    hasWinningCombination(boardState, ODiagonalL) ||
+    hasWinningCombination(boardState, ODiagonalR)
+  )
+}
+
+function checkXIsWinning(boardState) {
+  return (
+    hasWinningCombination(boardState, XInSameCol1) ||
+    hasWinningCombination(boardState, XInSameCol2) ||
+    hasWinningCombination(boardState, XInSameCol3) ||
+    hasWinningCombination(boardState, XInSameRow1) ||
+    hasWinningCombination(boardState, XInSameRow2) ||
+    hasWinningCombination(boardState, XInSameRow3) ||
+    hasWinningCombination(boardState, XDiagonalL) ||
+    hasWinningCombination(boardState, XDiagonalR)
+  )
+}
+
 const Board = ({ rows, cols }) => {
   const { outcome, boardState, setOutcome } = useContext(GameContext)
   const rowArr = [...Array(Number.parseInt(rows))]
-  const {
-    XInSameCol1,
-    XInSameCol2,
-    XInSameCol3,
-    XInSameRow1,
-    XInSameRow2,
-    XInSameRow3,
-    XDiagonal,
-  } = winningCombinationX
-
-  const {
-    OInSameCol1,
-    OInSameCol2,
-    OInSameCol3,
-    OInSameRow1,
-    OInSameRow2,
-    OInSameRow3,
-    ODiagonal,
-  } = winningCombinationO
 
   useEffect(() => {
-    const XIsWinning =
-      hasWinningCombination(boardState, XInSameCol1) ||
-      hasWinningCombination(boardState, XInSameCol2) ||
-      hasWinningCombination(boardState, XInSameCol3) ||
-      hasWinningCombination(boardState, XInSameRow1) ||
-      hasWinningCombination(boardState, XInSameRow2) ||
-      hasWinningCombination(boardState, XInSameRow3) ||
-      hasWinningCombination(boardState, XDiagonal)
-    const OIsWinning =
-      hasWinningCombination(boardState, OInSameCol1) ||
-      hasWinningCombination(boardState, OInSameCol2) ||
-      hasWinningCombination(boardState, OInSameCol3) ||
-      hasWinningCombination(boardState, OInSameRow1) ||
-      hasWinningCombination(boardState, OInSameRow2) ||
-      hasWinningCombination(boardState, OInSameRow3) ||
-      hasWinningCombination(boardState, ODiagonal)
+    const XIsWinning = checkXIsWinning(boardState)
+    const OIsWinning = checkOIsWinner(boardState)
 
     if (XIsWinning) setOutcome('Winner is X')
     else if (OIsWinning) setOutcome('Winner is O')
