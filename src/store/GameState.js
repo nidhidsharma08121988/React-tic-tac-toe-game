@@ -1,6 +1,9 @@
-import React, { useReducer, createContext } from 'react'
+import React, { useReducer, createContext, useEffect } from 'react'
 import gameReducer from './gameReducer'
-import { SET_BOARD_STATE, SET_TURNS } from './types'
+import { SET_BOARD_STATE, SET_TURNS, SET_OUTCOME } from './types'
+import winningCombinationX from './winningCombinationX'
+import winningCombinationO from './winningCombinationO'
+import boardContainsObject from './boardContainsObject'
 
 const initialState = {
   boardState: {
@@ -42,13 +45,20 @@ const initialState = {
     },
   },
   outcome: '',
-  rows: '3',
-  cols: '3',
   turns: 0,
 }
+
 export const GameContext = createContext(initialState)
+
 const GameState = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState)
+
+  useEffect(() => {
+    if (boardContainsObject(state.boardState, winningCombinationX))
+      setOutcome('Winner is X')
+    if (boardContainsObject(state.boardState, winningCombinationO))
+      setOutcome('Winner is O')
+  }, [state.boardState])
 
   const setBoardState = newBoardState => {
     dispatch({
@@ -63,6 +73,13 @@ const GameState = ({ children }) => {
       payload: turns,
     })
   }
+
+  const setOutcome = text => {
+    dispatch({
+      type: SET_OUTCOME,
+      payload: text,
+    })
+  }
   return (
     <GameContext.Provider
       value={{
@@ -70,6 +87,8 @@ const GameState = ({ children }) => {
         setBoardState,
         turns: state.turns,
         setTurns,
+        outcome: state.outcome,
+        setOutcome,
       }}
     >
       {children}
