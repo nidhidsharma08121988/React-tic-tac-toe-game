@@ -45,9 +45,10 @@ function checkXIsWinning(boardState) {
     hasWinningCombination(boardState, XInSameRow1) ||
     hasWinningCombination(boardState, XInSameRow2) ||
     hasWinningCombination(boardState, XInSameRow3) ||
-    hasWinningCombination(boardState, XInSameCol1)
+    hasWinningCombination(boardState, XInSameCol1) ||
+    hasWinningCombination(boardState, XInSameCol2)
   )
-  // hasWinningCombination(boardState, XInSameCol2) ||
+  //  ||
   // hasWinningCombination(boardState, XInSameCol3) ||
 
   // hasWinningCombination(boardState, XDiagonalL) ||
