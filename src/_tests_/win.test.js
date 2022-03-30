@@ -4,11 +4,20 @@ import GameState from '../store/GameState'
 
 describe('Game won', () => {
   describe('Player X wins', () => {
-    const consecutiveRowClick = (xRowId, oRowId) => {
+    const consecutiveXInRow = (xRowId, oRowId) => {
       for (let col = 1; col <= 3; col++) {
         const xBtn = screen.getByTestId(`${xRowId}C${col}`)
         xBtn.click()
         const oBtn = screen.getByTestId(`${oRowId}C${col}`)
+        oBtn.click()
+      }
+    }
+
+    const consecutiveXInCol = (xColId, oColId) => {
+      for (let row = 1; row <= 3; row++) {
+        const xBtn = screen.getByTestId(`R${row}${xColId}`)
+        xBtn.click()
+        const oBtn = screen.getByTestId(`R${row}${oColId}`)
         oBtn.click()
       }
     }
@@ -20,7 +29,7 @@ describe('Game won', () => {
         </GameState>
       )
 
-      consecutiveRowClick('R1', 'R3')
+      consecutiveXInRow('R1', 'R3')
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
 
@@ -31,7 +40,7 @@ describe('Game won', () => {
         </GameState>
       )
 
-      consecutiveRowClick('R1', 'R3')
+      consecutiveXInRow('R1', 'R3')
 
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
@@ -43,7 +52,7 @@ describe('Game won', () => {
         </GameState>
       )
 
-      consecutiveRowClick('R3', 'R1')
+      consecutiveXInRow('R3', 'R1')
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
 
@@ -54,12 +63,7 @@ describe('Game won', () => {
         </GameState>
       )
 
-      for (let row = 1; row <= 3; row++) {
-        const xBtn = screen.getByTestId(`R${row}C1`)
-        xBtn.click()
-        const oBtn = screen.getByTestId(`R${row}C3`)
-        oBtn.click()
-      }
+      consecutiveXInCol('C1', 'C3')
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
     test('Consecutive X diagnally', () => {})
