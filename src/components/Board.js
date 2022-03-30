@@ -47,7 +47,6 @@ function checkXIsWinning(boardState) {
     hasWinningCombination(boardState, XInSameRow3) ||
     hasWinningCombination(boardState, XInSameCol1)
   )
-  //  ||
   // hasWinningCombination(boardState, XInSameCol2) ||
   // hasWinningCombination(boardState, XInSameCol3) ||
 
