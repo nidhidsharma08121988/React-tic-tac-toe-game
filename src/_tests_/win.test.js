@@ -66,6 +66,17 @@ describe('Game won', () => {
       consecutiveXInCol('C1', 'C3')
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
+
+    test('Consecutive X in a column 2', () => {
+      render(
+        <GameState>
+          <Board rows='3' cols='3' />
+        </GameState>
+      )
+
+      consecutiveXInCol('C2', 'C3')
+      expect(screen.getByText('Winner is X')).toBeTruthy()
+    })
     test('Consecutive X diagnally', () => {})
   })
 })
