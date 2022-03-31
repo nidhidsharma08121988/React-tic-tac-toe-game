@@ -22,6 +22,18 @@ describe('Game won', () => {
       }
     }
 
+    const consecutiveXDiagnallyFromLeft = () => {
+      let xBtn = screen.getByTestId('R1C1')
+      xBtn.click()
+      let oBtn = screen.getByTestId('R1C2')
+      oBtn.click()
+      xBtn = screen.getByTestId('R2C2')
+      xBtn.click()
+      oBtn = screen.getByTestId('R1C3')
+      oBtn.click()
+      xBtn = screen.getByTestId('R3C3')
+      xBtn.click()
+    }
     test('Consecutive X in row 1', () => {
       render(
         <GameState>
@@ -89,6 +101,14 @@ describe('Game won', () => {
       expect(screen.getByText('Winner is X')).toBeTruthy()
     })
 
-    test('Consecutive X diagnally', () => {})
+    test('Consecutive X diagnally from left corner', () => {
+      render(
+        <GameState>
+          <Board rows='3' cols='3' />
+        </GameState>
+      )
+      consecutiveXDiagnallyFromLeft()
+      expect(screen.getByText('Winner is X')).toBeTruthy()
+    })
   })
 })
