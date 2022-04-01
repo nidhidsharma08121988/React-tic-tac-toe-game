@@ -27,44 +27,40 @@ const {
   ODiagonalR,
 } = winningCombinationO
 
-function checkOIsWinner(boardState) {
-  return (
-    hasWinningCombination(boardState, OInSameCol1) ||
-    hasWinningCombination(boardState, OInSameCol2) ||
-    hasWinningCombination(boardState, OInSameCol3) ||
-    hasWinningCombination(boardState, OInSameRow1) ||
-    hasWinningCombination(boardState, OInSameRow2) ||
-    hasWinningCombination(boardState, OInSameRow3) ||
-    hasWinningCombination(boardState, ODiagonalL) ||
-    hasWinningCombination(boardState, ODiagonalR)
-  )
-}
+const checkOIsWinner = boardState =>
+  hasWinningCombination(boardState, OInSameCol1) ||
+  hasWinningCombination(boardState, OInSameCol2) ||
+  hasWinningCombination(boardState, OInSameCol3) ||
+  hasWinningCombination(boardState, OInSameRow1) ||
+  hasWinningCombination(boardState, OInSameRow2) ||
+  hasWinningCombination(boardState, OInSameRow3) ||
+  hasWinningCombination(boardState, ODiagonalL) ||
+  hasWinningCombination(boardState, ODiagonalR)
 
-function checkXIsWinning(boardState) {
-  return (
-    hasWinningCombination(boardState, XInSameRow1) ||
-    hasWinningCombination(boardState, XInSameRow2) ||
-    hasWinningCombination(boardState, XInSameRow3) ||
-    hasWinningCombination(boardState, XInSameCol1) ||
-    hasWinningCombination(boardState, XInSameCol2) ||
-    hasWinningCombination(boardState, XInSameCol3)
-  )
+const checkXIsWinner = boardState =>
+  hasWinningCombination(boardState, XInSameRow1) ||
+  hasWinningCombination(boardState, XInSameRow2) ||
+  hasWinningCombination(boardState, XInSameRow3) ||
+  hasWinningCombination(boardState, XInSameCol1) ||
+  hasWinningCombination(boardState, XInSameCol2) ||
+  hasWinningCombination(boardState, XInSameCol3) ||
+  hasWinningCombination(boardState, XDiagonalL)
 
-  // hasWinningCombination(boardState, XDiagonalL) ||
-  // hasWinningCombination(boardState, XDiagonalR)
-}
+//  ||
+// hasWinningCombination(boardState, XDiagonalR)
 
 const Board = ({ rows, cols }) => {
   const { outcome, boardState, setOutcome } = useContext(GameContext)
   const rowArr = [...Array(Number.parseInt(rows))]
 
   useEffect(() => {
-    const XIsWinning = checkXIsWinning(boardState)
-    // const OIsWinning = checkOIsWinner(boardState)
+    const XIsWinner = checkXIsWinner(boardState)
+    const OIsWinner = checkOIsWinner(boardState)
 
-    if (XIsWinning) setOutcome('Winner is X')
-    // else if (OIsWinning) setOutcome('Winner is O')
-    // else setOutcome('')
+    if (XIsWinner) setOutcome('Winner is X')
+    else if (OIsWinner) setOutcome('Winner is O')
+    else setOutcome('')
+
     //eslint-disable-next-line
   }, [boardState])
 
