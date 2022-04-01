@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import Board from '../components/Board'
 import GameState from '../store/GameState'
 
@@ -22,19 +22,17 @@ describe('Game won', () => {
       }
     }
 
-    const consecutiveXDiagnallyFromLeft = () => {
-      let xBtn = screen.getByTestId('R1C1')
-      xBtn.click()
-      let oBtn = screen.getByTestId('R1C2')
-      oBtn.click()
-      xBtn = screen.getByTestId('R2C2')
-      xBtn.click()
-      oBtn = screen.getByTestId('R1C3')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C3')
-      xBtn.click()
+    const consecutiveXDiagonallyFromLeft = () => {
+      for (let i = 1; i < 3; i++) {
+        let xBtn = screen.getByTestId(`R${i}C${i}`)
+        xBtn.click()
+        let oBtn = screen.getByTestId(`R1C${i + 1}`)
+        oBtn.click()
+      }
+      let xbtn = screen.getByTestId('R3C3')
+      xbtn.click()
     }
-    test('Consecutive X in row 1', () => {
+    test('Consecutive X in row 1', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -42,10 +40,12 @@ describe('Game won', () => {
       )
 
       consecutiveXInRow('R1', 'R3')
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X in row 2', () => {
+    test('Consecutive X in row 2', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -53,11 +53,12 @@ describe('Game won', () => {
       )
 
       consecutiveXInRow('R1', 'R3')
-
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X in row 3', () => {
+    test('Consecutive X in row 3', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -65,10 +66,12 @@ describe('Game won', () => {
       )
 
       consecutiveXInRow('R3', 'R1')
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X in a column 1', () => {
+    test('Consecutive X in a column 1', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -76,10 +79,12 @@ describe('Game won', () => {
       )
 
       consecutiveXInCol('C1', 'C3')
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X in a column 2', () => {
+    test('Consecutive X in a column 2', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -87,10 +92,12 @@ describe('Game won', () => {
       )
 
       consecutiveXInCol('C2', 'C3')
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X in a column 3', () => {
+    test('Consecutive X in a column 3', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
@@ -98,17 +105,21 @@ describe('Game won', () => {
       )
 
       consecutiveXInCol('C3', 'C1')
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
 
-    test('Consecutive X diagnally from left corner', () => {
+    test('Consecutive X diagonally from left corner', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
         </GameState>
       )
-      consecutiveXDiagnallyFromLeft()
-      expect(screen.getByText('Winner is X')).toBeTruthy()
+      consecutiveXDiagonallyFromLeft()
+      await waitFor(() => {
+        expect(screen.getByText('Winner is X')).toBeTruthy()
+      })
     })
   })
 })
