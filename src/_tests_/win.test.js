@@ -173,6 +173,21 @@ describe('Game won', () => {
       }
     }
 
+    const consecutiveOInCol = () => {
+      let xBtn = screen.getByTestId('R2C2')
+      xBtn.click()
+      let oBtn = screen.getByTestId('R1C1')
+      oBtn.click()
+      xBtn = screen.getByTestId('R3C3')
+      xBtn.click()
+      oBtn = screen.getByTestId('R2C1')
+      oBtn.click()
+      xBtn = screen.getByTestId('R3C2')
+      xBtn.click()
+      oBtn = screen.getByTestId('R3C1')
+      oBtn.click()
+    }
+
     test('Consecutive O in row 1', async () => {
       render(
         <GameState>
@@ -219,18 +234,7 @@ describe('Game won', () => {
         </GameState>
       )
 
-      let xBtn = screen.getByTestId('R2C2')
-      xBtn.click()
-      let oBtn = screen.getByTestId('R1C1')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C3')
-      xBtn.click()
-      oBtn = screen.getByTestId('R2C1')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C2')
-      xBtn.click()
-      oBtn = screen.getByTestId('R3C1')
-      oBtn.click()
+      consecutiveOInCol()
 
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
