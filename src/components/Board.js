@@ -28,14 +28,14 @@ const {
 } = winningCombinationO
 
 const checkOIsWinner = boardState =>
-  hasWinningCombination(boardState, OInSameCol1) ||
-  hasWinningCombination(boardState, OInSameCol2) ||
-  hasWinningCombination(boardState, OInSameCol3) ||
-  hasWinningCombination(boardState, OInSameRow1) ||
-  hasWinningCombination(boardState, OInSameRow2) ||
-  hasWinningCombination(boardState, OInSameRow3) ||
-  hasWinningCombination(boardState, ODiagonalL) ||
-  hasWinningCombination(boardState, ODiagonalR)
+  hasWinningCombination(boardState, OInSameRow1)
+//  hasWinningCombination(boardState, OInSameCol1)
+// hasWinningCombination(boardState, OInSameCol2) ||
+// hasWinningCombination(boardState, OInSameCol3) ||
+// hasWinningCombination(boardState, OInSameRow2) ||
+// hasWinningCombination(boardState, OInSameRow3) ||
+// hasWinningCombination(boardState, ODiagonalL) ||
+// hasWinningCombination(boardState, ODiagonalR)
 
 const checkXIsWinner = boardState =>
   hasWinningCombination(boardState, XInSameRow1) ||
@@ -58,8 +58,8 @@ const Board = ({ rows, cols }) => {
     const OIsWinner = checkOIsWinner(boardState)
 
     if (XIsWinner) setOutcome('Winner is X')
-    // else if (OIsWinner) setOutcome('Winner is O')
-    //else setOutcome('')
+    else if (OIsWinner) setOutcome('Winner is O')
+    else setOutcome('')
 
     //eslint-disable-next-line
   }, [boardState])
