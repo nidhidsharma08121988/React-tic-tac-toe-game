@@ -58,8 +58,8 @@ const Board = ({ rows, cols }) => {
     const OIsWinner = checkOIsWinner(boardState)
 
     if (XIsWinner) setOutcome('Winner is X')
-    else if (OIsWinner) setOutcome('Winner is O')
-    else setOutcome('')
+    // else if (OIsWinner) setOutcome('Winner is O')
+    //else setOutcome('')
 
     //eslint-disable-next-line
   }, [boardState])
