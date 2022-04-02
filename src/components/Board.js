@@ -30,8 +30,9 @@ const {
 const checkOIsWinner = boardState =>
   hasWinningCombination(boardState, OInSameRow1) ||
   hasWinningCombination(boardState, OInSameRow2) ||
-  hasWinningCombination(boardState, OInSameRow3)
-//  hasWinningCombination(boardState, OInSameCol1)
+  hasWinningCombination(boardState, OInSameRow3) ||
+  hasWinningCombination(boardState, OInSameCol1)
+//
 // hasWinningCombination(boardState, OInSameCol2) ||
 // hasWinningCombination(boardState, OInSameCol3) ||
 // ||
