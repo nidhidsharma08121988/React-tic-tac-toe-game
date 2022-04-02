@@ -184,5 +184,18 @@ describe('Game won', () => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
     })
+    test('Consecutive O in row 3', async () => {
+      render(
+        <GameState>
+          <Board rows='3' cols='3' />
+        </GameState>
+      )
+
+      consecutiveOInRow('R3')
+
+      await waitFor(() => {
+        expect(screen.getByText('Winner is O')).toBeTruthy()
+      })
+    })
   })
 })
