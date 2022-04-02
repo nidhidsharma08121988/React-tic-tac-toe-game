@@ -123,24 +123,62 @@ describe('Game won', () => {
     })
   })
   describe('Player O wins:', () => {
+    const consecutiveOInRow = rowId => {
+      let xBtn = null
+      let oBtn = null
+      if (rowId === 'R1') {
+        xBtn = screen.getByTestId('R2C2')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C1`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R2C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C2`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C3`)
+        oBtn.click()
+        return
+      }
+      if (rowId === 'R2') {
+        xBtn = screen.getByTestId('R1C2')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C1`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R1C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C2`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C3`)
+        oBtn.click()
+        return
+      }
+    }
+
     test('Consecutive O in row 1', async () => {
       render(
         <GameState>
           <Board rows='3' cols='3' />
         </GameState>
       )
-      let xBtn = screen.getByTestId('R2C2')
-      xBtn.click()
-      let oBtn = screen.getByTestId('R1C1')
-      oBtn.click()
-      xBtn = screen.getByTestId('R2C3')
-      xBtn.click()
-      oBtn = screen.getByTestId('R1C2')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C3')
-      xBtn.click()
-      oBtn = screen.getByTestId('R1C3')
-      oBtn.click()
+
+      consecutiveOInRow('R1')
+
+      await waitFor(() => {
+        expect(screen.getByText('Winner is O')).toBeTruthy()
+      })
+    })
+    test('Consecutive O in row 2', async () => {
+      render(
+        <GameState>
+          <Board rows='3' cols='3' />
+        </GameState>
+      )
+
+      consecutiveOInRow('R2')
 
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
