@@ -156,6 +156,21 @@ describe('Game won', () => {
         oBtn.click()
         return
       }
+      if (rowId === 'R3') {
+        xBtn = screen.getByTestId('R1C2')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C1`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R1C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C2`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R2C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`${rowId}C3`)
+        oBtn.click()
+        return
+      }
     }
 
     test('Consecutive O in row 1', async () => {
