@@ -173,19 +173,39 @@ describe('Game won', () => {
       }
     }
 
-    const consecutiveOInCol = () => {
-      let xBtn = screen.getByTestId('R2C2')
-      xBtn.click()
-      let oBtn = screen.getByTestId('R1C1')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C3')
-      xBtn.click()
-      oBtn = screen.getByTestId('R2C1')
-      oBtn.click()
-      xBtn = screen.getByTestId('R3C2')
-      xBtn.click()
-      oBtn = screen.getByTestId('R3C1')
-      oBtn.click()
+    const consecutiveOInCol = colId => {
+      let xBtn = null
+      let oBtn = null
+      if (colId === 'C1') {
+        xBtn = screen.getByTestId('R2C2')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R1${colId}`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R2${colId}`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C2')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R3${colId}`)
+        oBtn.click()
+        return
+      }
+      if (colId === 'C2') {
+        xBtn = screen.getByTestId('R2C1')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R1${colId}`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C3')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R2${colId}`)
+        oBtn.click()
+        xBtn = screen.getByTestId('R3C1')
+        xBtn.click()
+        oBtn = screen.getByTestId(`R3${colId}`)
+        oBtn.click()
+        return
+      }
     }
 
     test('Consecutive O in row 1', async () => {
@@ -196,7 +216,6 @@ describe('Game won', () => {
       )
 
       consecutiveOInRow('R1')
-
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
@@ -209,7 +228,6 @@ describe('Game won', () => {
       )
 
       consecutiveOInRow('R2')
-
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
@@ -222,7 +240,6 @@ describe('Game won', () => {
       )
 
       consecutiveOInRow('R3')
-
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
@@ -234,8 +251,19 @@ describe('Game won', () => {
         </GameState>
       )
 
-      consecutiveOInCol()
+      consecutiveOInCol('C1')
+      await waitFor(() => {
+        expect(screen.getByText('Winner is O')).toBeTruthy()
+      })
+    })
+    test('Consecutive O in column 2', async () => {
+      render(
+        <GameState>
+          <Board rows='3' cols='3' />
+        </GameState>
+      )
 
+      consecutiveOInCol('C2')
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
