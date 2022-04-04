@@ -31,12 +31,10 @@ const checkOIsWinner = boardState =>
   hasWinningCombination(boardState, OInSameRow1) ||
   hasWinningCombination(boardState, OInSameRow2) ||
   hasWinningCombination(boardState, OInSameRow3) ||
-  hasWinningCombination(boardState, OInSameCol1)
-//
-// hasWinningCombination(boardState, OInSameCol2) ||
+  hasWinningCombination(boardState, OInSameCol1) ||
+  hasWinningCombination(boardState, OInSameCol2)
+
 // hasWinningCombination(boardState, OInSameCol3) ||
-// ||
-//  ||
 // hasWinningCombination(boardState, ODiagonalL) ||
 // hasWinningCombination(boardState, ODiagonalR)
 
@@ -48,9 +46,6 @@ const checkXIsWinner = boardState =>
   hasWinningCombination(boardState, XInSameCol2) ||
   hasWinningCombination(boardState, XInSameCol3) ||
   hasWinningCombination(boardState, XDiagonalL)
-
-//  ||
-// hasWinningCombination(boardState, XDiagonalR)
 
 const Board = ({ rows, cols }) => {
   const { outcome, boardState, setOutcome } = useContext(GameContext)
