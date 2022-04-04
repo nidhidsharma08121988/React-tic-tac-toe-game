@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import Board from '../components/Board'
-import GameState from '../store/GameState'
+import App from '../App'
 
 describe('Game won', () => {
   describe('Player X wins', () => {
@@ -33,11 +32,7 @@ describe('Game won', () => {
       xbtn.click()
     }
     test('Consecutive X in row 1', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveXInRow('R1', 'R3')
       await waitFor(() => {
@@ -46,12 +41,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X in row 2', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
-
+      render(<App />)
       consecutiveXInRow('R1', 'R3')
       await waitFor(() => {
         expect(screen.getByText('Winner is X')).toBeTruthy()
@@ -59,11 +49,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X in row 3', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveXInRow('R3', 'R1')
       await waitFor(() => {
@@ -72,11 +58,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X in a column 1', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveXInCol('C1', 'C3')
       await waitFor(() => {
@@ -85,11 +67,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X in a column 2', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveXInCol('C2', 'C3')
       await waitFor(() => {
@@ -98,11 +76,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X in a column 3', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveXInCol('C3', 'C1')
       await waitFor(() => {
@@ -111,11 +85,7 @@ describe('Game won', () => {
     })
 
     test('Consecutive X diagonally from left corner', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
       consecutiveXDiagonallyFromLeft()
       await waitFor(() => {
         expect(screen.getByText('Winner is X')).toBeTruthy()
@@ -224,11 +194,7 @@ describe('Game won', () => {
     }
 
     test('Consecutive O in row 1', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveOInRow('R1')
       await waitFor(() => {
@@ -236,23 +202,14 @@ describe('Game won', () => {
       })
     })
     test('Consecutive O in row 2', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
-
+      render(<App />)
       consecutiveOInRow('R2')
       await waitFor(() => {
         expect(screen.getByText('Winner is O')).toBeTruthy()
       })
     })
     test('Consecutive O in row 3', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveOInRow('R3')
       await waitFor(() => {
@@ -260,11 +217,7 @@ describe('Game won', () => {
       })
     })
     test('Consecutive O in column 1', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveOInCol('C1')
       await waitFor(() => {
@@ -272,11 +225,7 @@ describe('Game won', () => {
       })
     })
     test('Consecutive O in column 2', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveOInCol('C2')
       await waitFor(() => {
@@ -284,11 +233,7 @@ describe('Game won', () => {
       })
     })
     test('Consecutive O in column 3', async () => {
-      render(
-        <GameState>
-          <Board rows='3' cols='3' />
-        </GameState>
-      )
+      render(<App />)
 
       consecutiveOInCol('C3')
       await waitFor(() => {
