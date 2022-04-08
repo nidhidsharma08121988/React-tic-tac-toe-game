@@ -48,28 +48,29 @@ const checkXIsWinner = boardState =>
   hasWinningCombination(boardState, XDiagonalL) ||
   hasWinningCombination(boardState, XDiagonalR)
 
-const Block = ({ colId, rowId }) => {
+const Block = ({ colId, rowId, setRestartGame }) => {
   const { boardState, setBoardState, turns, setTurns, setOutcome, freezeGame } =
     useContext(GameContext)
-
+  const [wonGame, setWonGame] = useState(false)
   const [isFreezed, setIsFreezed] = useState(false)
 
   useEffect(() => {
-    if (!isFreezed) {
+    if (!isFreezed && !wonGame) {
       checkBoardStateAndSetOutcome()
-      function checkBoardStateAndSetOutcome() {
-        const XIsWinner = checkXIsWinner(boardState)
-        const OIsWinner = checkOIsWinner(boardState)
+    }
+    function checkBoardStateAndSetOutcome() {
+      const XIsWinner = checkXIsWinner(boardState)
+      const OIsWinner = checkOIsWinner(boardState)
 
-        if (XIsWinner) {
-          setOutcome('Winner is X')
-          setIsFreezed(true)
-        } else if (OIsWinner) {
-          setOutcome('Winner is O')
-          setIsFreezed(true)
-        } else {
-          setOutcome('')
-        }
+      if (XIsWinner) {
+        setOutcome('Winner is X')
+        setIsFreezed(true)
+        setWonGame(true)
+      } else if (OIsWinner) {
+        setOutcome('Winner is O')
+        setIsFreezed(true)
+      } else {
+        setOutcome('')
       }
     }
   }, [boardState])
@@ -77,6 +78,10 @@ const Block = ({ colId, rowId }) => {
   useEffect(() => {
     if (isFreezed) freezeGame()
   }, [isFreezed])
+
+  useEffect(() => {
+    if (wonGame) setRestartGame(true)
+  }, [wonGame])
 
   const setBlockValueTo = (e, value) => {
     const newBlockState = {

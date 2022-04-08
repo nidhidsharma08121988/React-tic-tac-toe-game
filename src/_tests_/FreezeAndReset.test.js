@@ -31,9 +31,8 @@ describe('When any player wins', () => {
     test('When X wins', async () => {
       render(<App />)
       consecutiveXDiagonallyFromLeft()
-      const startBtn = screen.queryByTestId('start-again-btn')
       await waitFor(() => {
-        expect(startBtn).toBeTruthy()
+        expect(screen.getByTestId('start-again-btn')).toBeTruthy()
       })
     })
     test('When o wins', () => {})
