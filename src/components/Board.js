@@ -17,9 +17,11 @@ const Board = ({ rows, cols }) => {
       </div>
 
       <div className='outcome'>{outcome}</div>
-      <div>
+      <div className='restart'>
         {restartGame ? (
-          <button data-testid='start-again-btn'>Start Again</button>
+          <button data-testid='start-again-btn' className='restart-btn'>
+            Start Again
+          </button>
         ) : (
           ''
         )}
