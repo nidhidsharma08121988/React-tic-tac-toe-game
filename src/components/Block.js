@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GameContext } from '../store/GameState'
 import {
   winningCombinationO,
@@ -34,10 +34,9 @@ const checkOIsWinner = boardState =>
   hasWinningCombination(boardState, OInSameRow3) ||
   hasWinningCombination(boardState, OInSameCol1) ||
   hasWinningCombination(boardState, OInSameCol2) ||
-  hasWinningCombination(boardState, OInSameCol3)
-
-// hasWinningCombination(boardState, ODiagonalL) ||
-// hasWinningCombination(boardState, ODiagonalR)
+  hasWinningCombination(boardState, OInSameCol3) ||
+  hasWinningCombination(boardState, ODiagonalL) ||
+  hasWinningCombination(boardState, ODiagonalR)
 
 const checkXIsWinner = boardState =>
   hasWinningCombination(boardState, XInSameRow1) ||
@@ -50,24 +49,34 @@ const checkXIsWinner = boardState =>
   hasWinningCombination(boardState, XDiagonalR)
 
 const Block = ({ colId, rowId }) => {
-  const { boardState, setBoardState, turns, setTurns, setOutcome } =
+  const { boardState, setBoardState, turns, setTurns, setOutcome, freezeGame } =
     useContext(GameContext)
 
+  const [isFreezed, setIsFreezed] = useState(false)
+
   useEffect(() => {
-    checkBoardStateAndSetOutcome()
+    if (!isFreezed) {
+      checkBoardStateAndSetOutcome()
+      function checkBoardStateAndSetOutcome() {
+        const XIsWinner = checkXIsWinner(boardState)
+        const OIsWinner = checkOIsWinner(boardState)
+
+        if (XIsWinner) {
+          setOutcome('Winner is X')
+          setIsFreezed(true)
+        } else if (OIsWinner) {
+          setOutcome('Winner is O')
+          setIsFreezed(true)
+        } else {
+          setOutcome('')
+        }
+      }
+    }
   }, [boardState])
 
-  const checkBoardStateAndSetOutcome = () => {
-    const XIsWinner = checkXIsWinner(boardState)
-    const OIsWinner = checkOIsWinner(boardState)
-
-    if (XIsWinner) setOutcome('Winner is X')
-    else if (OIsWinner) setOutcome('Winner is O')
-    else setOutcome('')
-  }
-
-  const setDisableValue = () => boardState[`${rowId}${colId}`].disabled
-  const showValue = () => boardState[`${rowId}${colId}`].value
+  useEffect(() => {
+    if (isFreezed) freezeGame()
+  }, [isFreezed])
 
   const setBlockValueTo = (e, value) => {
     const newBlockState = {
@@ -88,15 +97,17 @@ const Block = ({ colId, rowId }) => {
     }
     setTurns(turns + 1)
   }
+  const getDisabled = () => boardState[`${rowId}${colId}`].disabled
+
   return (
     <button
       className='tic-toc-square'
       id={`${rowId}${colId}`}
       data-testid={`${rowId}${colId}`}
       onClick={handleBlockClick}
-      disabled={setDisableValue()}
+      disabled={getDisabled()}
     >
-      {showValue()}
+      {boardState[`${rowId}${colId}`].value}
     </button>
   )
 }

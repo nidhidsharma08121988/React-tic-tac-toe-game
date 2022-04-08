@@ -1,6 +1,6 @@
 import React, { useReducer, createContext } from 'react'
 import gameReducer from './gameReducer'
-import { SET_BOARD_STATE, SET_TURNS, SET_OUTCOME } from './types'
+import { SET_BOARD_STATE, SET_TURNS, SET_OUTCOME, FREEZE_GAME } from './types'
 
 const initialState = {
   boardState: {
@@ -69,6 +69,13 @@ const GameState = ({ children }) => {
       payload: text,
     })
   }
+
+  const freezeGame = () => {
+    dispatch({
+      type: FREEZE_GAME,
+    })
+  }
+
   return (
     <GameContext.Provider
       value={{
@@ -78,6 +85,7 @@ const GameState = ({ children }) => {
         setTurns,
         outcome: state.outcome,
         setOutcome,
+        freezeGame,
       }}
     >
       {children}
