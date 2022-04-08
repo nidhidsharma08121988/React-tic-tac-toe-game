@@ -69,6 +69,7 @@ const Block = ({ colId, rowId, setRestartGame }) => {
       } else if (OIsWinner) {
         setOutcome('Winner is O')
         setIsFreezed(true)
+        setWonGame(true)
       } else {
         setOutcome('')
       }
