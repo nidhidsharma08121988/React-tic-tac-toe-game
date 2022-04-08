@@ -1,10 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import App from '../App'
-import { consecutiveXInRow, consecutiveOInRow } from './testData'
+import {
+  consecutiveXInRow,
+  consecutiveOInRow,
+  consecutiveXDiagonallyFromLeft,
+} from './testData'
 
-describe('Freeze', () => {
-  describe('when any player wins', () => {
-    test('the game freezes when x wins', async () => {
+describe('When any player wins', () => {
+  describe('Game must freeze', () => {
+    test('when x wins', async () => {
       render(<App />)
       consecutiveXInRow('R1', 'R2')
       const allBlocks = screen.getAllByRole('button')
@@ -13,7 +17,7 @@ describe('Freeze', () => {
         expect(isDeactivated).toBe(true)
       })
     })
-    test('the game freezes when o wins', async () => {
+    test('when o wins', async () => {
       render(<App />)
       consecutiveOInRow('R1')
       const allBlocks = screen.getAllByRole('button')
@@ -22,6 +26,16 @@ describe('Freeze', () => {
         expect(isDeactivated).toBe(true)
       })
     })
-    test('a start again button must appear', () => {})
+  })
+  describe('Game must display restart button', () => {
+    test('When X wins', async () => {
+      render(<App />)
+      consecutiveXDiagonallyFromLeft()
+      const startBtn = screen.queryByTestId('start-again-btn')
+      await waitFor(() => {
+        expect(startBtn).toBeTruthy()
+      })
+    })
+    test('When o wins', () => {})
   })
 })
