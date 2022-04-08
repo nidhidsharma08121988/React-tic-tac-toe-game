@@ -97,7 +97,8 @@ const Block = ({ colId, rowId }) => {
     }
     setTurns(turns + 1)
   }
-  const getDisabled = () => boardState[`${rowId}${colId}`].disabled
+  const getDisabledValue = () => boardState[`${rowId}${colId}`].disabled
+  const blockValue = boardState[`${rowId}${colId}`].value
 
   return (
     <button
@@ -105,9 +106,9 @@ const Block = ({ colId, rowId }) => {
       id={`${rowId}${colId}`}
       data-testid={`${rowId}${colId}`}
       onClick={handleBlockClick}
-      disabled={getDisabled()}
+      disabled={getDisabledValue()}
     >
-      {boardState[`${rowId}${colId}`].value}
+      {blockValue}
     </button>
   )
 }
