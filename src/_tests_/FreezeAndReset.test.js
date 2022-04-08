@@ -4,6 +4,7 @@ import {
   consecutiveXInRow,
   consecutiveOInRow,
   consecutiveXDiagonallyFromLeft,
+  consecutiveOInCol,
 } from './testData'
 
 describe('When any player wins', () => {
@@ -35,6 +36,12 @@ describe('When any player wins', () => {
         expect(screen.getByTestId('start-again-btn')).toBeTruthy()
       })
     })
-    test('When o wins', () => {})
+    test('When O wins', async () => {
+      render(<App />)
+      consecutiveOInCol('C2')
+      await waitFor(() => {
+        expect(screen.getByTestId('start-again-btn')).toBeTruthy()
+      })
+    })
   })
 })
