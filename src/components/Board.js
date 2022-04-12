@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import RowsInBoard from './RowsInBoard'
+import StartAgain from './StartAgain'
 import { GameContext } from './../store/GameState'
+
 const Board = ({ rows, cols }) => {
   const { outcome } = useContext(GameContext)
   const rowArr = [...Array(Number.parseInt(rows))]
@@ -18,13 +20,7 @@ const Board = ({ rows, cols }) => {
 
       <div className='outcome'>{outcome}</div>
       <div className='restart'>
-        <button
-          data-testid='start-again-btn'
-          className='restart-btn'
-          visible={restartGame}
-        >
-          Start Again
-        </button>
+        <StartAgain restartGame={restartGame} />
       </div>
     </div>
   )
