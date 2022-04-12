@@ -7,14 +7,16 @@ import Board from '../components/Board'
 describe('When Start Again/Restart button is clicked:', () => {
   test('The game is reset', () => {
     const resetGame = jest.fn()
+    const setRestart = jest.fn()
     render(
       <GameContext.Provider value={{ resetGame }}>
-        <StartAgain restartGame={true} />
+        <StartAgain restartGame={true} setRestartGame={setRestart} />
       </GameContext.Provider>
     )
     const startAgainBtn = screen.getByTestId('start-again-btn')
     startAgainBtn.click()
     expect(resetGame).toBeCalled()
+    expect(setRestart).toBeCalledWith(false)
   })
   test('The button becomes hidden', async () => {
     render(

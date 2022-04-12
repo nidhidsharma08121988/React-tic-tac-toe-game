@@ -20,7 +20,7 @@ const Board = ({ rows, cols }) => {
 
       <div className='outcome'>{outcome}</div>
       <div className='restart'>
-        <StartAgain restartGame={restartGame} />
+        <StartAgain restartGame={restartGame} setRestartGame={setRestartGame} />
       </div>
     </div>
   )

@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 import { GameContext } from '../store/GameState'
 
-const StartAgain = ({ restartGame }) => {
+const StartAgain = ({ restartGame, setRestartGame }) => {
   const { resetGame } = useContext(GameContext)
   const handleReset = e => {
     resetGame()
+    setRestartGame(false)
   }
   return (
     restartGame && (
