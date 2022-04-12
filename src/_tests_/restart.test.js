@@ -3,7 +3,7 @@ import StartAgain from './../components/StartAgain'
 import { GameContext } from '../store/GameState'
 
 describe('When Start Again/Restart button is clicked:', () => {
-  test('The game is set according to initial boardState', () => {
+  test('The game is reset', () => {
     const resetGame = jest.fn()
     render(
       <GameContext.Provider value={{ resetGame }}>
