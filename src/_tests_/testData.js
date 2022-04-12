@@ -1,5 +1,44 @@
 import { screen } from '@testing-library/react'
 
+export const initialBoardState = {
+  R1C1: {
+    value: '',
+    disabled: false,
+  },
+  R1C2: {
+    value: '',
+    disabled: false,
+  },
+  R1C3: {
+    value: '',
+    disabled: false,
+  },
+  R2C1: {
+    value: '',
+    disabled: false,
+  },
+  R2C2: {
+    value: '',
+    disabled: false,
+  },
+  R2C3: {
+    value: '',
+    disabled: false,
+  },
+  R3C1: {
+    value: '',
+    disabled: false,
+  },
+  R3C2: {
+    value: '',
+    disabled: false,
+  },
+  R3C3: {
+    value: '',
+    disabled: false,
+  },
+}
+
 export const consecutiveXInRow = (xRowId, oRowId) => {
   for (let col = 1; col <= 3; col++) {
     const xBtn = screen.getByTestId(`${xRowId}C${col}`)
