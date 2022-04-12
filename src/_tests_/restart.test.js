@@ -1,21 +1,21 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import { useContext } from 'react'
-import GameState, { GameContext } from '../store/GameState'
 import { initialBoardState } from './testData'
+import StartAgain from './../components/StartAgain'
+import GameState from '../store/GameState'
 
 describe('When Start Again/Restart button is clicked:', () => {
-  test('The game is set to intial board state', async () => {
+  test('The game is set according to initial boardState', async () => {
+    const resetGame = jest.fn()
+    const yes = true
     render(
-      <GameState>
-        <StartAgain />
+      <GameState value={{ resetGame }}>
+        <StartAgain restartGame={yes} />
       </GameState>
     )
-    const { boardState } = useContext(GameContext)
-
     const startAgainBtn = screen.getByTestId('start-again-btn')
     startAgainBtn.click()
     await waitFor(() => {
-      expect(boardState).toBe(initialBoardState)
+      expect(resetGame).toBeCalled()
     })
   })
   test('The button becomes hidden', () => {})
