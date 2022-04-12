@@ -18,13 +18,13 @@ const Board = ({ rows, cols }) => {
 
       <div className='outcome'>{outcome}</div>
       <div className='restart'>
-        {restartGame ? (
-          <button data-testid='start-again-btn' className='restart-btn'>
-            Start Again
-          </button>
-        ) : (
-          ''
-        )}
+        <button
+          data-testid='start-again-btn'
+          className='restart-btn'
+          visible={restartGame}
+        >
+          Start Again
+        </button>
       </div>
     </div>
   )
