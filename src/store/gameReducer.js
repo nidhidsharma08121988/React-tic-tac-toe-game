@@ -1,4 +1,10 @@
-import { SET_BOARD_STATE, SET_TURNS, SET_OUTCOME, FREEZE_GAME } from './types'
+import {
+  SET_BOARD_STATE,
+  SET_TURNS,
+  SET_OUTCOME,
+  FREEZE_GAME,
+  RESET_GAME,
+} from './types'
 
 const gameReducer = (state, action) => {
   switch (action.type) {
@@ -58,6 +64,50 @@ const gameReducer = (state, action) => {
             disabled: true,
           },
         },
+      }
+    case RESET_GAME:
+      return {
+        ...state,
+        boardState: {
+          R1C1: {
+            value: '',
+            disabled: false,
+          },
+          R1C2: {
+            value: '',
+            disabled: false,
+          },
+          R1C3: {
+            value: '',
+            disabled: false,
+          },
+          R2C1: {
+            value: '',
+            disabled: false,
+          },
+          R2C2: {
+            value: '',
+            disabled: false,
+          },
+          R2C3: {
+            value: '',
+            disabled: false,
+          },
+          R3C1: {
+            value: '',
+            disabled: false,
+          },
+          R3C2: {
+            value: '',
+            disabled: false,
+          },
+          R3C3: {
+            value: '',
+            disabled: false,
+          },
+        },
+        outcome: '',
+        turns: 0,
       }
     default:
       return state
